@@ -1,0 +1,7 @@
+@import '~antd/dist/antd.css';
+
+
+.App {
+  background-color: rgb(166, 166, 168);
+  min-height: 100vh;
+}
