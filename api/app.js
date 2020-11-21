@@ -6,16 +6,24 @@ var logger = require('morgan');
 const mongo = require('./db/mongo')
 const redis = require('./db/redis')
 
-var indexRouter = require('./routes/index');
-
 var app = express();
-
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+//CONNECTION TO MONGO DATABASE
+mongo.connectToServer( function( err, client ) {
+  if (err) console.log(err);
+} );
+
+redis.connectToServer(function( err, client ) {
+  if (err) console.log(err);
+} );
+
+//SET ROUTES
+var indexRouter = require('./routes/index');
 app.use('/', indexRouter);
 
 // catch 404 and forward to error handler
@@ -33,7 +41,7 @@ app.use(function(err, req, res, next) {
   //res.header('Access-Control-Allow-Origin', 'http://localhost:3000/');
 
   res.status(err.status || 500);
-  res.render('error');
+  res.send('error');
 });
 
 app.listen(5000, () => {

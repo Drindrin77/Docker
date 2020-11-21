@@ -1,14 +1,23 @@
-const mongoose = require("mongoose");
+const MongoClient = require( 'mongodb' ).MongoClient;
+const url = "mongodb://mongodb:27017/";
 
-// Connecting to MongoDB
-mongoose.connect("mongodb://mongodb:27017/");
-// If there is a connection error send an error message
-mongoose.connection.on("error", error => {
-    console.log("ERROR:  Mongo Database connection error:", error);
-});
-// If connected to MongoDB send a success message
-mongoose.connection.once("open", () => {
-    console.log("Connected to Mongo Database!");
-});
+var _db;
 
-module.exports = mongoose;
+module.exports = {
+
+  connectToServer: function( callback ) {
+    MongoClient.connect( url,  { useNewUrlParser: true }, function( err, client ) {
+        console.log("Connected to Mongo Database!")
+        _db = client.db('dockerProject');
+        _db = _db.collection('rateDrindrin')
+        
+        return callback( err );
+    });
+  },
+
+  insertRate: function(data){
+    _db.insertOne(data, function(err, res) {
+      if (err) throw err;
+    });
+  }
+};
