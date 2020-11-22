@@ -56,9 +56,9 @@ export function TestForm(props: FormProps){
           rules={[{ required: true, message: 'Stp choisis', type: 'array' }]}
         >
           <Select mode="multiple" placeholder="Selectionne tes jeux favoris ">
-            <Option value="red">Among Us</Option>
-            <Option value="green">Phasmophobia</Option>
-            <Option value="blue">Heave Ho</Option>
+            <Option value="Among Us">Among Us</Option>
+            <Option value="Phasmophobia">Phasmophobia</Option>
+            <Option value="Heave Ho">Heave Ho</Option>
           </Select>
         </Form.Item>
   

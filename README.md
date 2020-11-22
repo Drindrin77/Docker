@@ -8,13 +8,8 @@ La date limite de publication du projet sur github est le 2 décembre.
 Comme discuté nous passerons l'aprés midi du 3 décembre à présenter les projet à la classe pour échanger sur vos réalisations.
 Vous pouvez vous mettre par équipe de 2 pour faire ces réalisations, merci de remplir le tableau ci aprés avec vos noms et url de projet
 
-
-
 #Commandes
 
 -sudo docker-compose up : pour lancer les containers
 -sudo docker exec -it redis redis-cli : pour se connecter au container redis
 -sudo docker exec -it mongodb bash : pour se connecter au container mongodb
-
-
-

@@ -5,13 +5,13 @@ const redis = require('../db/redis')
 
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.post('/', function(req, res, next) {
   try {
     mongo.insertRate(req.body)
     redis.insertRate(req.body)
-    res.send("Done")
+    res.status(200).send("Données enregistrés")
   } catch (error) {
-    res.send("Error: " + error)
+    res.status(500).send("Error: " + error)
   }
 
 });

@@ -5,6 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const mongo = require('./db/mongo')
 const redis = require('./db/redis')
+var cors = require('cors')
 
 var app = express();
 app.use(logger('dev'));
@@ -12,12 +13,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(cors())
 
 //CONNECTION TO MONGO DATABASE
 mongo.connectToServer( function( err, client ) {
   if (err) console.log(err);
 } );
-
+//CONNECTION TO REDIS DATABASE
 redis.connectToServer(function( err, client ) {
   if (err) console.log(err);
 } );
@@ -37,14 +39,13 @@ app.use(function(err, req, res, next) {
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
-  //res.header('Access-Control-Allow-Origin', 'http://localhost:3000/');
-
   res.status(err.status || 500);
   res.send('error');
 });
 
-app.listen(5000, () => {
+app.set('port', process.env.PORT || 5000);
+
+app.listen(app.get('port'), () => {
   console.log('Server listening on 5000')
 })
 
