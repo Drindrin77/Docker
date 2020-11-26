@@ -31,7 +31,6 @@ J'ai mis en place ce projet avec 4 docker en total :
 - Redis.
 
 Pour accéder à l'interface graphique de ce projet, lancez le projet avec ``docker-compose up`` et allez sur http://localhost:3000
-Le serveur tourne sur http://localhost:5000
 J'ai crée des volumes pour chaque container afin de garder la persistance pour Mongo DB et Redis et de stocker les node_modules pour React et Node JS
 
 ## Bases de données
